@@ -28,7 +28,7 @@ public class PlaceService {
     // Mono dela
     public Mono<Place> create(PlaceRequest placeRequest){
         // Criando uma variável place com as propriedades que vieram da minha request
-        var place = new Place(null, placeRequest.name(), slg.slugify(placeRequest.name()), placeRequest.state(), placeRequest.createdAt(), placeRequest.updatedAt());
+        var place = new Place(null, placeRequest.name(), slg.slugify(placeRequest.name()), placeRequest.state(), null, null);
         
         // Ao final, salvamos no banco de dados
         return placeRepository.save(place);
