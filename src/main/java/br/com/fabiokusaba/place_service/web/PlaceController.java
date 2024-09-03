@@ -2,6 +2,7 @@ package br.com.fabiokusaba.place_service.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class PlaceController {
 
     // Rota de criação
     @PostMapping
-    public ResponseEntity<Mono<PlaceResponse>> create(@RequestBody PlaceRequest request){
+    public ResponseEntity<Mono<PlaceResponse>> create(@Validated @RequestBody PlaceRequest request){
         // Montar a resposta é uma responsabilidade do controlador, não é uma responsabilidade do serviço porque isso aqui
         // não é regra de negócio, aqui estamos na camada web, na interface da API
         // A partir do place criado nós vamos mapear o resultado com aquela função que criamos na classe Mapper
