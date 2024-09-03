@@ -28,7 +28,12 @@ public class PlaceController {
     // Rota de criação
     @PostMapping
     public ResponseEntity<Mono<PlaceResponse>> create(@RequestBody PlaceRequest request){
-        var createdPlace = placeService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdPlace);
+        // Montar a resposta é uma responsabilidade do controlador, não é uma responsabilidade do serviço porque isso aqui
+        // não é regra de negócio, aqui estamos na camada web, na interface da API
+        // A partir do place criado nós vamos mapear o resultado com aquela função que criamos na classe Mapper
+        var placeResponse = placeService.create(request).map(PlaceMapper::fromPlaceToResponse);
+
+        // Ao final, retornamos a nossa resposta ao usuário
+        return ResponseEntity.status(HttpStatus.CREATED).body(placeResponse);
     }
 }
