@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fabiokusaba.place_service.api.PlaceRequest;
+import br.com.fabiokusaba.place_service.api.PlaceResponse;
 import br.com.fabiokusaba.place_service.domain.Place;
 import br.com.fabiokusaba.place_service.domain.PlaceService;
 import reactor.core.publisher.Mono;
@@ -25,8 +27,8 @@ public class PlaceController {
 
     // Rota de criação
     @PostMapping
-    public ResponseEntity<Mono<Place>> create(@RequestBody Place place){
-        var createdPlace = placeService.create(place);
+    public ResponseEntity<Mono<PlaceResponse>> create(@RequestBody PlaceRequest request){
+        var createdPlace = placeService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlace);
     }
 }
